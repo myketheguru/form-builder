@@ -1,9 +1,10 @@
 import './App.css'
+import DashboardScreen from './screens/DashboardScreen'
 
 const App = () => {
   return (
-    <div className="_app">
-      <h1>Building the future</h1>
+    <div className="app">
+      <DashboardScreen />
     </div>
   )
 }
