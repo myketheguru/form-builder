@@ -17,6 +17,6 @@ Project Created with React 😎
  * Create functions for generating Components 👊
  * Create Datamap for dropzone state 👊
 
- * Write Basic Styles for the dropped components
+ * Write Basic Styles for the dropped components 
  * Add new component types
  * Create Properties Panel Component
