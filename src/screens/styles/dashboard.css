@@ -67,6 +67,37 @@ main {
   padding: 30px 5%;
 }
 
+.arena #dropzone .container {
+    padding: 5px;
+    position: relative;
+}
+
+.arena #dropzone .container-active {
+    border: #839da9 1px solid;
+}
+
+.arena #dropzone .container:not(.container-active) :is(.edit, .del) {
+    display: none;
+}
+
+.arena #dropzone .container-active :is(.edit, .del) {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    padding: 5px;
+    color: white;
+    background-color: #f36868;
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.arena #dropzone .container-active :is(.edit) {
+    background-color: #435b72;
+    transform: translateX(-105%);
+}
+
 .arena > button {
   background-color: #16262e;
   color: #fff;

@@ -1,4 +1,4 @@
-import React from 'react'
+import { v4 as uuidV4 } from "uuid"
 import { BsTextParagraph, BsInputCursorText } from 'react-icons/bs'
 import { FaHeading } from 'react-icons/fa'
 import { GiClick } from 'react-icons/gi'
@@ -8,7 +8,11 @@ const ComponentPanel = () => {
 
     const handleDragStart = (evt) => {
         const obj = {}
+        obj.id = uuidV4()
+        obj.styles = {}
         let elementType = evt.target.dataset.element
+        evt.dataTransfer.dropEffect = 'move'
+        evt.dataTransfer.effectsAllowed = "all"
         obj.type = elementType
 
         if (elementType === 'h1') {

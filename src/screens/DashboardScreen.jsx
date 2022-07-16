@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState } from 'react'
+import { AiOutlineDelete } from "react-icons/ai"
+import { FiEdit } from "react-icons/fi"
 import ComponentPanel from '../components/ComponentPanel'
 import './styles/dashboard.css'
 
@@ -16,10 +18,15 @@ const DashboardScreen = () => {
 
     const handleDrop = (evt) => {
         evt.stopPropagation()
+
+        document.querySelectorAll('.container')
+        .forEach(container => container.classList.remove('container-active'))
+
         try {
             const data = JSON.parse(evt.dataTransfer.getData('text/plain') ?? '{}')
             if (data.className) {
                 setDropzoneData([ ...dropzoneData, data])
+                console.log(dropzoneData)
             }
             
             return false
@@ -30,6 +37,8 @@ const DashboardScreen = () => {
 
     const handleItemDrop = (evt) => {
         evt.stopPropagation()
+        document.querySelectorAll('.container')
+        .forEach(container => container.classList.remove('container-active'))
         const data = JSON.parse(evt.dataTransfer.getData('text/plain') ?? '{}')
         if (evt.dataTransfer.getData('text/plain').length === 1) {
             let newData = dropzoneData;
@@ -56,6 +65,24 @@ const DashboardScreen = () => {
         }
     }
 
+    const handleClick = (evt) => {
+        let target = evt.currentTarget
+
+        document.querySelectorAll('.container')
+        .forEach(container => container.classList.remove('container-active'))
+
+        if (target.classList.contains('container-active')) {
+            target.classList.remove('container-active')
+        } else {
+            target.classList.add('container-active')
+        }
+    }
+
+    const removeContainer = (evt, id) => {
+        let newDropzoneData = dropzoneData.filter(data => data.id !== id)
+        setDropzoneData(newDropzoneData)
+    }
+
   return (
     <div className="dashboard-screen">
         <nav></nav>
@@ -69,9 +96,16 @@ const DashboardScreen = () => {
                                 className: data.className, 
                                 placeholder: data.placeholder, 
                              }, data.innerHTML)
+
+                             const editBtn = React.createElement('button', { className: 'edit' }, <FiEdit />)
+                             
+                             const deleteBtn = React.createElement('button', { 
+                                className: 'del',
+                                onClick: (evt) => removeContainer(evt, data.id)
+                            }, <AiOutlineDelete />)
                                 
                             const container = React.createElement('div', {
-                                className: 'container',
+                                className: 'container container-active',
                                 draggable: true,
                                 id: 'container-' + index,
                                 key: index, 
@@ -79,8 +113,9 @@ const DashboardScreen = () => {
                                     evt.dataTransfer.setData('text/plain', index.toString())
                                 },
                                 onDragOver: (evt) => evt.preventDefault(),
-                                onDrop: handleItemDrop
-                            }, el)
+                                onDrop: handleItemDrop,
+                                onClick: handleClick
+                            }, el, editBtn, deleteBtn)
                             
                             return container
                         })
