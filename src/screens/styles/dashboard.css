@@ -1,70 +1,70 @@
 .dashboard-screen {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 nav {
-    background-color: #16262E;
-    height: 65px;
-    border-bottom: 2px solid #415660;
+  background-color: #16262e;
+  height: 65px;
+  border-bottom: 2px solid #415660;
 }
 
 main {
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
 }
 
 /* Component Panel */
 
 .components-panel {
-    background-color: #fff;
-    width: 280px;
+  background-color: #fff;
+  width: 280px;
 }
 
 .components-panel header {
-    background-color: #16262E;
-    color: #fff;
-    text-align: center;
-    padding: 15px;
-    font-size: 15px;
+  background-color: #16262e;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 15px;
 }
 
 .components-panel header p {
-    padding: 5px 0px;
-    font-size: 12px;
+  padding: 5px 0px;
+  font-size: 12px;
 }
 
 .components-panel .components-list {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .components-panel .components-list .component {
-    padding: 12px 15px;
-    border-radius: 8px;
-    background-color: #f1f1f1;
-    color: #415660;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: grab;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  color: #415660;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: grab;
 }
 
 .arena {
-    background-color: #bbcbcb40;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 12px;
-    padding: 40px 5%;
+  background-color: #bbcbcb40;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 12px;
+  padding: 40px 5%;
 }
 
 .arena #dropzone {
-    background-color: #fff;
-    padding: 30px 5%;
+  background-color: #fff;
+  padding: 30px 5%;
 }
 
 .arena #dropzone .container {
@@ -120,13 +120,13 @@ main {
 }
 
 .arena > button {
-    background-color: #16262E;
-    color: #fff;
-    padding: 10px 20px;
-    justify-self: flex-end;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
+  background-color: #16262e;
+  color: #fff;
+  padding: 10px 20px;
+  justify-self: flex-end;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
 }
 
 .properties-panel {
