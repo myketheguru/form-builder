@@ -17,6 +17,29 @@ Project Created with React 😎
  * Create functions for generating Components 👊
  * Create Datamap for dropzone state 👊
 
- * Write Basic Styles for the dropped components 
+ * Write Basic Styles for the dropped components 👊
+ * Create Properties Panel Component 👊
  * Add new component types
- * Create Properties Panel Component
+ ##### Styles that matter to us
+ * Color - Backgroud, Foreground 👊
+
+ * Typography 
+ - Font > Weight, Size, Family, Style
+ - Alignment - Text -> Start, Center, End, justify
+ - Alignment -> Line Height -> Normal, Custom Value
+ - Alignment -> Letter Spacing -> Normal, Custom Value
+
+ * Content -> text labels, input placeholders, input values 👊
+
+ * Spacing 
+ - Margin -> Top/Right/Bottom/Left 
+ - Border -> Width, Style, Color, Top/Right/Bottom/Left
+ - Padding -> Top/Right/Bottom/Left 
+ - Width/Height
+
+ * Misc
+ - Box-Shadow
+ - Border-Radius
+
+ * Use uuid library for generating unique id strings 👊
+ * Implement Global State management using zustand 👊

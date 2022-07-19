@@ -9,7 +9,47 @@ const ComponentPanel = () => {
     const handleDragStart = (evt) => {
         const obj = {}
         obj.id = uuidV4()
-        obj.styles = {}
+        obj.styles = {
+            color: '',
+            background: '',
+            borderRadius: '',
+            borderTopLeftRadius: '',
+            borderTopRightRadius: '',
+            borderBottomLeftRadius: '',
+            borderBottomRightRadius: '',
+            boxShadow: '',
+            margin: '',
+            marginTop: '',
+            marginRight: '',
+            marginBottom: '',
+            marginLeft: '',
+            border: '',
+            borderTop: '',
+            borderRight: '',
+            borderBottom: '',
+            borderLeft: '',
+            borderWidth: '',
+            borderStyle: '',
+            borderColor: '',
+            padding: '',
+            paddingTop: '',
+            paddingRight: '',
+            paddingBottom: '',
+            paddingLeft: '',
+            width: '',
+            height: '',
+            font: '',
+            fontFamily: '',
+            fontSize: '',
+            fontWeight: '',
+            fontStyle: '',
+            textAlign: '',
+            lineHeight: '',
+            letterSpacing: '',
+        }
+        obj.content = {
+            value: '',
+        }
         let elementType = evt.target.dataset.element
         evt.dataTransfer.dropEffect = 'move'
         evt.dataTransfer.effectsAllowed = "all"

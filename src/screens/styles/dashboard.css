@@ -68,8 +68,29 @@ main {
 }
 
 .arena #dropzone .container {
+    width: 100%;
     padding: 5px;
     position: relative;
+    min-height: 28px;
+    word-wrap: break-word;
+}
+
+.arena #dropzone .container input {
+    padding: 10px;
+    outline: none;
+    border: 1px solid #839da9;
+    border-radius: 5px;
+}
+
+.arena #dropzone .container button:first-child {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #435b72;
+    color: #fff;
+    min-width: 90px;
+    min-height: 35px;
 }
 
 .arena #dropzone .container-active {
@@ -111,4 +132,56 @@ main {
 .properties-panel {
     background-color: #fff;
     width: 280px;
+}
+
+.properties-panel > h3 {
+    background-color: #16262E;
+    color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.properties-panel .block {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #435b72;
+    font-size: 12px;
+    border-bottom: 1px solid #cacaca;
+}
+
+.properties-panel .block textarea {
+    padding: 10px;
+    outline: none;
+    border: 1px dashed #76858d;
+    resize: vertical;
+}
+
+/* Color Picker */
+._color_picker {
+    border: 1px dashed #76858d;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+._color_picker .color-indicator {
+    border: 1px solid #cfdae0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+._color_picker input {
+    width: 0;
+    height: 0;
+    position: absolute;
 }

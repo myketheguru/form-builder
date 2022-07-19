@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineDelete } from "react-icons/ai"
 import { FiEdit } from "react-icons/fi"
 import ComponentPanel from '../components/ComponentPanel'
+import PropertiesPanel from '../components/PropertiesPanel'
+import { useDropzoneState } from '../store/store'
 import './styles/dashboard.css'
 
 const DashboardScreen = () => {
 
-    const [dropzoneData, setDropzoneData] = useState([])
-    const dropzoneRef = useRef()
+    const dropzoneData = useDropzoneState(state => state.dropzoneData)
+    const showProperties = useDropzoneState(state => state.showProperties)
+    const setDropzoneData = useDropzoneState(state => state.setDropzoneData)
+    const setShowProperties = useDropzoneState(state => state.setShowProperties)
+    const setSelectedDataIndex = useDropzoneState(state => state.setSelectedDataIndex)
     const [renderCount, setRenderCount] = useState(0)
 
     const handleDragOver = (evt) => {
@@ -28,6 +33,9 @@ const DashboardScreen = () => {
                 setDropzoneData([ ...dropzoneData, data])
                 console.log(dropzoneData)
             }
+
+            setSelectedDataIndex(dropzoneData.length)
+            setShowProperties(true)
             
             return false
         } catch (error) {
@@ -65,7 +73,8 @@ const DashboardScreen = () => {
         }
     }
 
-    const handleClick = (evt) => {
+    const handleClick = (evt, index) => {
+        evt.stopPropagation()
         let target = evt.currentTarget
 
         document.querySelectorAll('.container')
@@ -76,12 +85,65 @@ const DashboardScreen = () => {
         } else {
             target.classList.add('container-active')
         }
+        setSelectedDataIndex(index)
+        setShowProperties(true)
     }
 
     const removeContainer = (evt, id) => {
+        evt.stopPropagation()
         let newDropzoneData = dropzoneData.filter(data => data.id !== id)
         setDropzoneData(newDropzoneData)
+        setSelectedDataIndex(-1)
+        setShowProperties(false)
     }
+
+    const dismissContainerActive = (evt) => {
+        document.querySelectorAll('.container')
+        .forEach(container => container.classList.remove('container-active'))
+        setShowProperties(false)
+    }
+
+    const generateDropzoneData = (data, index) => {
+        const el = data.type === 'input' ? React.createElement(data.type, { 
+            className: data.className,
+            style: data.styles, 
+            placeholder: data.placeholder, 
+         }) : React.createElement(data.type, { 
+            className: data.className,
+            style: data.styles,
+         },  data.innerHTML)
+
+         const editBtn = React.createElement('button', { className: 'edit' }, <FiEdit />)
+         
+         const deleteBtn = React.createElement('button', {
+            className: 'del',
+            onClick: (evt) => removeContainer(evt, data.id)
+        }, <AiOutlineDelete />)
+            
+        const container = React.createElement('div', {
+            className: 'container container-active',
+            draggable: true,
+            id: 'container-' + index,
+            key: index, 
+            onDragStart: (evt) => {
+                evt.dataTransfer.setData('text/plain', index.toString())
+            },
+            onDragOver: (evt) => evt.preventDefault(),
+            onDrop: handleItemDrop,
+            onClick: (evt) => handleClick(evt, index)
+        }, el, editBtn, deleteBtn)
+        
+        return container
+    }
+    
+    useEffect(() => {
+      document.addEventListener('click', dismissContainerActive)
+      
+      return () => {
+        document.removeEventListener('click', dismissContainerActive)
+      }
+    }, [])
+    
 
   return (
     <div className="dashboard-screen">
@@ -89,41 +151,14 @@ const DashboardScreen = () => {
         <main>
             <ComponentPanel />
             <div className="arena">
-                <div id="dropzone" onDragOver={handleDragOver} onDrop={handleDrop} ref={dropzoneRef}>
+                <div id="dropzone" onDragOver={handleDragOver} onDrop={handleDrop}>
                     {
-                        dropzoneData.map((data, index) => {
-                            const el = React.createElement(data.type, { 
-                                className: data.className, 
-                                placeholder: data.placeholder, 
-                             }, data.innerHTML)
-
-                             const editBtn = React.createElement('button', { className: 'edit' }, <FiEdit />)
-                             
-                             const deleteBtn = React.createElement('button', { 
-                                className: 'del',
-                                onClick: (evt) => removeContainer(evt, data.id)
-                            }, <AiOutlineDelete />)
-                                
-                            const container = React.createElement('div', {
-                                className: 'container container-active',
-                                draggable: true,
-                                id: 'container-' + index,
-                                key: index, 
-                                onDragStart: (evt) => {
-                                    evt.dataTransfer.setData('text/plain', index.toString())
-                                },
-                                onDragOver: (evt) => evt.preventDefault(),
-                                onDrop: handleItemDrop,
-                                onClick: handleClick
-                            }, el, editBtn, deleteBtn)
-                            
-                            return container
-                        })
+                        dropzoneData.map(generateDropzoneData)
                     }
                 </div>
                 <button>Export to file</button>
             </div>
-            <aside className="properties-panel"></aside>
+            {showProperties &&  <PropertiesPanel rerender={setRenderCount} />}
         </main>
     </div>
   )
