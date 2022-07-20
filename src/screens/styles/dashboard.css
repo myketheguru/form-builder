@@ -1,5 +1,5 @@
 .dashboard-screen {
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
 }
@@ -132,6 +132,10 @@ main {
 .properties-panel {
     background-color: #fff;
     width: 280px;
+  }
+  
+  .properties-panel .inner {
+  overflow-y: auto;
 }
 
 .properties-panel > h3 {
@@ -159,6 +163,23 @@ main {
     resize: vertical;
 }
 
+.properties-panel .block input {
+    padding: 10px;
+    outline: none;
+    border: 1px dashed #76858d;
+}
+
+.properties-panel .block .dir {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.properties-panel .block .dir input {
+    width: 100%;
+    border-style: solid;
+}
+
 /* Color Picker */
 ._color_picker {
     border: 1px dashed #76858d;
@@ -181,6 +202,7 @@ main {
 }
 
 ._color_picker input {
+    opacity: 0;
     width: 0;
     height: 0;
     position: absolute;
