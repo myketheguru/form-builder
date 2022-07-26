@@ -1,5 +1,5 @@
 .dashboard-screen {
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
 }
@@ -132,11 +132,9 @@ main {
 .properties-panel {
     background-color: #fff;
     width: 280px;
+    height: calc(100vh - 65px);
+    overflow-y: auto;
   }
-  
-  .properties-panel .inner {
-  overflow-y: auto;
-}
 
 .properties-panel > h3 {
     background-color: #16262E;
@@ -178,6 +176,40 @@ main {
 .properties-panel .block .dir input {
     width: 100%;
     border-style: solid;
+}
+
+.properties-panel .alignment  {
+  display: flex;
+  border-radius: 8px;
+  border: #16262E 1px solid;
+}
+
+.properties-panel .alignment button  {
+  flex: 1;
+  padding: 8px;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.properties-panel .alignment button:is(:hover, .selected) {
+  background-color: #c5d0d6;
+}
+
+.properties-panel .alignment button:first-child  {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: 1px solid #ccc;
+}
+
+.properties-panel .alignment button:last-child  {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-left: 1px solid #ccc;
 }
 
 /* Color Picker */

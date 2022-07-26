@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDropzoneState } from '../store/store'
+import Alignment from './Alignment'
 import ColorPicker from './ColorPicker'
 
 const PropertiesPanel = ({ rerender }) => {
@@ -45,7 +46,20 @@ const PropertiesPanel = ({ rerender }) => {
     setDropzoneData(newData)
     rerender(Math.random() * 1000)
   }
-  
+
+  const handleAlignmentChange = (alignment) => {
+    let newData = dropzoneData
+    newData[selectedDataIndex].styles = { ...newData[selectedDataIndex].styles, textAlign: alignment }
+    setDropzoneData(newData)
+    rerender(Math.random() * 1000)
+  }  
+
+  const handleFontValuesChange = (prop, value) => {
+    let newData = dropzoneData
+    newData[selectedDataIndex].styles = { ...newData[selectedDataIndex].styles, [prop]: value }
+    setDropzoneData(newData)
+    rerender(Math.random() * 1000)
+  }  
 
   return selectedDataIndex >= 0 ? (
     <aside className="properties-panel" onClick={evt => evt.stopPropagation()}>
@@ -62,6 +76,56 @@ const PropertiesPanel = ({ rerender }) => {
                     handleContentChange(evt)
                 }} 
                 cols="30" rows="5"></textarea>
+        </div>
+        <div className="block">
+            <p>Typography</p>
+                <Alignment onChange={handleAlignmentChange} />
+                <div className="dir">
+                <input 
+                  type="text"
+                  placeholder='Font Family'
+                    // value={
+                    //     dropzoneData[selectedDataIndex]?.styles.padding
+                    // } 
+                    name={'fontFamily'}
+                    onChange={evt => {
+                      handleFontValuesChange(evt.target.name, evt.target.value)
+                    }} 
+               />
+                <input 
+                  type="text"
+                  placeholder='Font Size (px)'
+                    // value={
+                    //     dropzoneData[selectedDataIndex]?.styles.padding
+                    // } 
+                  name={'fontSize'}
+                  onChange={evt => {
+                    handleFontValuesChange(evt.target.name, evt.target.value)
+                  }} 
+                />
+                <input 
+                  type="text"
+                  placeholder='Font Weight'
+                    // value={
+                    //     dropzoneData[selectedDataIndex]?.styles.padding
+                    // } 
+                  name={'fontWeight'}
+                  onChange={evt => {
+                    handleFontValuesChange(evt.target.name, evt.target.value)
+                  }} 
+                />
+                <input 
+                  type="text"
+                  placeholder='Font Style'
+                    // value={
+                    //     dropzoneData[selectedDataIndex]?.styles.padding
+                    // } 
+                  name={'fontStyle'}
+                  onChange={evt => {
+                    handleFontValuesChange(evt.target.name, evt.target.value)
+                  }} 
+                />
+               </div>
         </div>
         <div className="block">
             <p>Padding</p>

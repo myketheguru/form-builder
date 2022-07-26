@@ -24,17 +24,17 @@ Project Created with React 😎
  * Color - Backgroud, Foreground 👊
 
  * Typography 
- - Font > Weight, Size, Family, Style
- - Alignment - Text -> Start, Center, End, justify
+ - Font > Weight, Size, Family, Style 👊
+ - Alignment - Text -> Start, Center, End, justify 👊
  - Alignment -> Line Height -> Normal, Custom Value
  - Alignment -> Letter Spacing -> Normal, Custom Value
 
  * Content -> text labels, input placeholders, input values 👊
 
  * Spacing 
- - Margin -> Top/Right/Bottom/Left 
- - Border -> Width, Style, Color, Top/Right/Bottom/Left
- - Padding -> Top/Right/Bottom/Left 
+ - Margin -> Top/Right/Bottom/Left 👊
+ - Border -> Width, Style, Color, Top/Right/Bottom/Left 👊
+ - Padding -> Top/Right/Bottom/Left 👊
  - Width/Height
 
  * Misc
