@@ -32,9 +32,11 @@ const DashboardScreen = () => {
             if (data.className) {
                 setDropzoneData([ ...dropzoneData, data])
                 console.log(dropzoneData)
+                setSelectedDataIndex(dropzoneData.length)
+            } else {
+                setDropzoneData([ ...dropzoneData])
             }
 
-            setSelectedDataIndex(dropzoneData.length)
             setShowProperties(true)
             
             return false
@@ -108,6 +110,8 @@ const DashboardScreen = () => {
             className: data.className,
             style: data.styles, 
             placeholder: data.placeholder, 
+            minLength: Number(data.min || '0'),
+            maxLength: Number(data.max || '256'),
          }) : React.createElement(data.type, { 
             className: data.className,
             style: data.styles,

@@ -71,6 +71,8 @@ const ComponentPanel = () => {
         } else if (elementType === 'input') {
             obj.placeholder = 'Enter text'
             obj.className = 'input-component'
+            obj.min = ''
+            obj.max = ''
         }
 
         evt.dataTransfer.setData('text/plain', JSON.stringify(obj))

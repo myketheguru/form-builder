@@ -29,20 +29,20 @@ const PropertiesPanel = ({ rerender }) => {
     rerender(Math.random() * 1000)
   }
 
-  const handlePaddingChange = (value, dir) => {
+  const handlePaddingChange = (prop, value) => {
     let newData = dropzoneData
     newData[selectedDataIndex].styles = { 
       ...newData[selectedDataIndex].styles, 
-      [dir === 'top' ? 'paddingTop' : dir === 'right' ? 'paddingRight' : dir === 'bottom' ? 'paddingBottom' : dir === 'left' ? 'paddingLeft' : 'padding']: value + 'px' }
+      [prop]: value }
     setDropzoneData(newData)
     rerender(Math.random() * 1000)
   }
   
-  const handleMarginChange = (value, dir) => {
+  const handleMarginChange = (prop, value) => {
     let newData = dropzoneData
     newData[selectedDataIndex].styles = { 
       ...newData[selectedDataIndex].styles, 
-      [dir === 'top' ? 'marginTop' : dir === 'right' ? 'marginRight' : dir === 'bottom' ? 'marginBottom' : dir === 'left' ? 'marginLeft' : 'margin']: value + 'px' }
+      [prop]: value }
     setDropzoneData(newData)
     rerender(Math.random() * 1000)
   }
@@ -60,6 +60,13 @@ const PropertiesPanel = ({ rerender }) => {
     setDropzoneData(newData)
     rerender(Math.random() * 1000)
   }  
+
+  const handleMinMaxChange = (prop, value) => {
+    let newData = dropzoneData
+    newData[selectedDataIndex] = { ...dropzoneData[selectedDataIndex], [prop]: value  }
+    setDropzoneData(newData)
+    rerender(Math.random() * 1000)
+  }
 
   return selectedDataIndex >= 0 ? (
     <aside className="properties-panel" onClick={evt => evt.stopPropagation()}>
@@ -127,62 +134,72 @@ const PropertiesPanel = ({ rerender }) => {
                 />
                </div>
         </div>
+        {
+          dropzoneData[selectedDataIndex].type === 'input' &&
+          <div className="block">
+            <p>Character Limit</p>
+            <div className="dir">
+              <input type="number" placeholder='MIN' onChange={evt => { handleMinMaxChange('min', evt.target.value) }} />
+              <input type="number" placeholder='MAX' onChange={evt => { handleMinMaxChange('max', evt.target.value) }} />
+            </div>
+          </div>
+        }
         <div className="block">
             <p>Padding</p>
             <input 
-              type="number"
+              type="text"
               placeholder='padding (All sides)'
                 // value={
                 //     dropzoneData[selectedDataIndex]?.styles.padding
                 // } 
                 name={'padding'}
                 onChange={evt => {
-                    handlePaddingChange(evt.target.value, 'all')
+                    handlePaddingChange(evt.target.name, evt.target.value)
                 }} 
                />
                <div className="dir">
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='top'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.padding
                     // } 
                   name={'paddingTop'}
                   onChange={evt => {
-                      handlePaddingChange(evt.target.value, 'top')
+                      handlePaddingChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='right'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.padding
                     // } 
                   name={'paddingRight'}
                   onChange={evt => {
-                      handlePaddingChange(evt.target.value, 'right')
+                      handlePaddingChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='left'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.padding
                     // } 
                   name={'paddingLeft'}
                   onChange={evt => {
-                      handlePaddingChange(evt.target.value, 'left')
+                      handlePaddingChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='bottom'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.padding
                     // } 
                   name={'paddingBottom'}
                   onChange={evt => {
-                      handlePaddingChange(evt.target.value, 'bottom')
+                      handlePaddingChange(evt.target.name, evt.target.value)
                   }} 
                 />
                </div>
@@ -190,59 +207,59 @@ const PropertiesPanel = ({ rerender }) => {
         <div className="block">
             <p>Margin</p>
             <input 
-              type="number"
+              type="text"
               placeholder='margin (All sides)'
                 // value={
                 //     dropzoneData[selectedDataIndex]?.styles.margin
                 // } 
                 name={'margin'}
                 onChange={evt => {
-                    handleMarginChange(evt.target.value, 'all')
+                    handleMarginChange(evt.target.name, evt.target.value)
                 }} 
                />
                <div className="dir">
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='top'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.margin
                     // } 
                   name={'marginTop'}
                   onChange={evt => {
-                      handleMarginChange(evt.target.value, 'top')
+                      handleMarginChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='right'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.margin
                     // } 
                   name={'marginRight'}
                   onChange={evt => {
-                      handleMarginChange(evt.target.value, 'right')
+                      handleMarginChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='left'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.margin
                     // } 
                   name={'marginLeft'}
                   onChange={evt => {
-                      handleMarginChange(evt.target.value, 'left')
+                      handleMarginChange(evt.target.name, evt.target.value)
                   }} 
                 />
                 <input 
-                  type="number"
+                  type="text"
                   placeholder='bottom'
                     // value={
                     //     dropzoneData[selectedDataIndex]?.styles.margin
                     // } 
                   name={'marginBottom'}
                   onChange={evt => {
-                      handleMarginChange(evt.target.value, 'bottom')
+                      handleMarginChange(evt.target.name, evt.target.value)
                   }} 
                 />
                </div>
