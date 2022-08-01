@@ -13,6 +13,7 @@ const DashboardScreen = () => {
     const showProperties = useDropzoneState(state => state.showProperties)
     const setDropzoneData = useDropzoneState(state => state.setDropzoneData)
     const setShowProperties = useDropzoneState(state => state.setShowProperties)
+    const selectedDataIndex = useDropzoneState(state => state.selectedDataIndex)
     const setSelectedDataIndex = useDropzoneState(state => state.setSelectedDataIndex)
     const [renderCount, setRenderCount] = useState(0)
 
@@ -105,6 +106,13 @@ const DashboardScreen = () => {
         setShowProperties(false)
     }
 
+    const handleValueChange = (evt) => {
+        let newData = dropzoneData
+        newData[selectedDataIndex] = { ...dropzoneData[selectedDataIndex], value: evt.target.value  }
+        setDropzoneData(newData)
+        setRenderCount(Math.random() * 1000)
+      }
+
     const generateDropzoneData = (data, index) => {
         const el = data.type === 'input' ? React.createElement(data.type, { 
             className: data.className,
@@ -112,6 +120,9 @@ const DashboardScreen = () => {
             placeholder: data.placeholder, 
             minLength: Number(data.min || '0'),
             maxLength: Number(data.max || '256'),
+            value: data.value,
+            disabled: data.disabled,
+            onChange: handleValueChange,
          }) : React.createElement(data.type, { 
             className: data.className,
             style: data.styles,

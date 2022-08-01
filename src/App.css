@@ -1,0 +1,46 @@
+
+.button-switch {
+    width: 80px;
+    height: 45px;
+    border-radius: 8px;
+    background-color: #2b2929;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .button-switch input {
+    display: none;
+  }
+  
+  .button-switch label {
+    background-color: #181717;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    border-radius: 8px;
+    position: relative;
+    padding: 4px;
+    transition: 0.5s;
+  }
+  
+  .button-switch input:checked + label {
+    background-color: mediumspringgreen;
+    box-shadow: 0 0 15px mediumspringgreen;
+    border: none;
+  }
+  
+  .button-switch input:checked + label .actuator {
+    transform: translate(100%);
+    background-color: #21272b;
+  }
+  
+  .button-switch label .actuator {
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #393737;
+    transition: 0.5s;
+    position: relative;
+  }
+  

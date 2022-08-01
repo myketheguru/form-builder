@@ -73,6 +73,8 @@ const ComponentPanel = () => {
             obj.className = 'input-component'
             obj.min = ''
             obj.max = ''
+            obj.value = ""
+            obj.disabled = false
         }
 
         evt.dataTransfer.setData('text/plain', JSON.stringify(obj))

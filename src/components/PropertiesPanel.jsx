@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDropzoneState } from '../store/store'
 import Alignment from './Alignment'
+import ButtonSwitch from './ButtonSwitch'
 import ColorPicker from './ColorPicker'
 
 const PropertiesPanel = ({ rerender }) => {
@@ -11,6 +12,20 @@ const PropertiesPanel = ({ rerender }) => {
   const handleContentChange = (evt) => {
     let newData = dropzoneData
     newData[selectedDataIndex] = { ...dropzoneData[selectedDataIndex], [(dropzoneData[selectedDataIndex] && ('innerHTML' in dropzoneData[selectedDataIndex])) ? 'innerHTML' : 'placeholder']: evt.target.value  }
+    setDropzoneData(newData)
+    rerender(Math.random() * 1000)
+  }
+
+  const handleValueChange = (evt) => {
+    let newData = dropzoneData
+    newData[selectedDataIndex] = { ...dropzoneData[selectedDataIndex], value: evt.target.value  }
+    setDropzoneData(newData)
+    rerender(Math.random() * 1000)
+  }
+
+  const handleReadOnlyField = (evt) => {
+    let newData = dropzoneData
+    newData[selectedDataIndex] = { ...dropzoneData[selectedDataIndex], disabled: !dropzoneData[selectedDataIndex].disabled  }
     setDropzoneData(newData)
     rerender(Math.random() * 1000)
   }
@@ -73,7 +88,7 @@ const PropertiesPanel = ({ rerender }) => {
         <h3>Field Properties</h3>
         <div className="inner">
         <div className="block">
-            <p>Label Text</p>
+            <p>{dropzoneData[selectedDataIndex]?.placeholder ? 'Placeholder' : 'Label Text'}</p>
             <textarea 
                 value={
                     dropzoneData[selectedDataIndex]?.innerHTML || dropzoneData[selectedDataIndex]?.placeholder
@@ -84,6 +99,29 @@ const PropertiesPanel = ({ rerender }) => {
                 }} 
                 cols="30" rows="5"></textarea>
         </div>
+        {dropzoneData[selectedDataIndex].type === 'input' &&
+          <div className="block">
+            <p>Default Value</p>
+            <textarea 
+                name={'value'}
+                value={
+                  dropzoneData[selectedDataIndex]?.value
+                }
+                onChange={evt => {
+                    handleValueChange(evt)
+                }} 
+                cols="30" rows="3"></textarea>
+        </div>}
+        {dropzoneData[selectedDataIndex].type === 'input' &&
+        <div className="block">
+            <p>Read Only</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <ButtonSwitch
+              onChange={handleReadOnlyField}
+             />
+             <p>{ dropzoneData[selectedDataIndex]?.disabled ? 'ON' : 'OFF' }</p>
+            </div>
+        </div>}
         <div className="block">
             <p>Typography</p>
                 <Alignment onChange={handleAlignmentChange} />
